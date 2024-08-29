@@ -98,10 +98,15 @@
       <artifactId>subethasmtp-wiser</artifactId>
       <scope>test</scope>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>mysql</groupId>-->
+<!--      <artifactId>mysql-connector-java</artifactId>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <scope>test</scope>
+      <groupId>com.xugudb</groupId>
+      <artifactId>xugu-jdbc</artifactId>
+      <version>12.3.0</version>
     </dependency>
     <dependency>
       <groupId>org.postgresql</groupId>
