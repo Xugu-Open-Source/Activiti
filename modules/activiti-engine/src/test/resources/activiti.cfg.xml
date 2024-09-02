@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <bean id="processEngineConfiguration"
-    class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+        class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
 
-    <property name="jdbcUrl" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=1000" />
-    <property name="jdbcDriver" value="org.h2.Driver" />
-    <property name="jdbcUsername" value="sa" />
-    <property name="jdbcPassword" value="" />
+    <property name="jdbcDriver" value="com.xugu.cloudjdbc.Driver"/>
+    <property name="jdbcUrl" value="jdbc:xugu://localhost:5138/activiti_v522?useUnicode=true&amp;uselike=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true&amp;keyword_filter=LINK"/>
+    <property name="jdbcUsername" value="SYSDBA"/>
+    <property name="jdbcPassword" value="SYSDBA"/>
+    <!-- activiti数据库表处理策略 -->
+    <property name="databaseSchemaUpdate" value="true"/>
 
-    <!-- Database configurations -->
-    <property name="databaseSchemaUpdate" value="drop-create" />
 
     <!-- job executor configurations -->
     <property name="jobExecutorActivate" value="false" />
@@ -46,7 +46,6 @@
     <property name="history" value="full" />
 
     <property name="enableProcessDefinitionInfoCache" value="true" />
-
   </bean>
 
   <bean id="asyncExecutor" class="org.activiti.engine.impl.asyncexecutor.DefaultAsyncJobExecutor">
