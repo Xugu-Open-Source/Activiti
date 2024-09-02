@@ -48,6 +48,7 @@ public class DbSqlSessionFactory implements SessionFactory {
     databaseSpecificLimitBetweenStatements.put("xugu", "");
     databaseOuterJoinLimitBetweenStatements.put("xugu", "");
     databaseSpecificOrderByStatements.put("xugu", defaultOrderBy);
+    addDatabaseSpecificStatement("xugu", "bulkInsertExecution", "bulkInsertExecution_xugu");
 
 
     // h2
