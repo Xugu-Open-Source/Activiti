@@ -41,7 +41,17 @@ public class DbSqlSessionFactory implements SessionFactory {
   static {
     
     String defaultOrderBy = " order by ${orderByColumns} ";
-    
+
+    //xugu
+    databaseSpecificLimitBeforeStatements.put("xugu", "");
+    databaseSpecificLimitAfterStatements.put("xugu", "LIMIT #{maxResults} OFFSET #{firstResult}");
+    databaseSpecificLimitBetweenStatements.put("xugu", "");
+    databaseOuterJoinLimitBetweenStatements.put("xugu", "");
+    databaseSpecificOrderByStatements.put("xugu", defaultOrderBy);
+    addDatabaseSpecificStatement("xugu", "bulkInsertExecution", "bulkInsertExecution_xugu");
+
+
+
     // h2
     databaseSpecificLimitBeforeStatements.put("h2", "");
     databaseSpecificLimitAfterStatements.put("h2", "LIMIT #{maxResults} OFFSET #{firstResult}");

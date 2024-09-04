@@ -10,4 +10,8 @@
   <root level="INFO">
     <appender-ref ref="CA"/>
   </root>
+
+  <logger name="com.example" level="DEBUG">
+    <appender-ref ref="STDOUT" />
+  </logger>
 </configuration>
