@@ -15,6 +15,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>com.xugudb</groupId>
+      <artifactId>xugu-jdbc</artifactId>
+      <version>12.3.0</version>
+    </dependency>
+    <dependency>
       <groupId>org.activiti.api</groupId>
       <artifactId>activiti-api-runtime-shared</artifactId>
     </dependency>
