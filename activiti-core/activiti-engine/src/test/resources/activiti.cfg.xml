@@ -6,14 +6,12 @@
 
   <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
 
-    <property name="jdbcUrl" value="jdbc:h2:mem:activiti;DB_CLOSE_DELAY=-1" />
-    <property name="jdbcDriver" value="org.h2.Driver" />
-    <property name="jdbcUsername" value="sa" />
-    <property name="jdbcPassword" value="" />
-
-    <!-- Database configurations -->
-    <property name="databaseSchemaUpdate" value="drop-create" />
-
+    <property name="jdbcDriver" value="com.xugu.cloudjdbc.Driver"/>
+    <property name="jdbcUrl" value="jdbc:xugu://localhost:5138/activiti_test?useUnicode=true&amp;uselike=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true&amp;keyword_filter=LINK"/>
+    <property name="jdbcUsername" value="SYSDBA"/>
+    <property name="jdbcPassword" value="SYSDBA"/>
+    <!-- activiti数据库表处理策略 -->
+    <property name="databaseSchemaUpdate" value="true"/>
 	<!-- Test logger -->
 	<!-- <property name="configurators">
 		<list>
