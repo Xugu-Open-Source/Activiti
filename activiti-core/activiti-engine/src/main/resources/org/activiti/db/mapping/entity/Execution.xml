@@ -182,7 +182,41 @@
     where ID_ = #{id, jdbcType=VARCHAR}
       and REV_ = #{revision, jdbcType=INTEGER}
   </update>
-
+  <insert id="bulkInsertExecution" databaseId="cae" parameterType="java.util.List">
+    insert into ${prefix}ACT_RU_EXECUTION (ID_, REV_, PROC_INST_ID_, BUSINESS_KEY_, PROC_DEF_ID_, ACT_ID_, IS_ACTIVE_, IS_CONCURRENT_, IS_SCOPE_,IS_EVENT_SCOPE_, IS_MI_ROOT_, PARENT_ID_, SUPER_EXEC_, ROOT_PROC_INST_ID_, SUSPENSION_STATE_, TENANT_ID_, NAME_, START_TIME_, START_USER_ID_, LOCK_TIME_,IS_COUNT_ENABLED_, EVT_SUBSCR_COUNT_, TASK_COUNT_, JOB_COUNT_, TIMER_JOB_COUNT_, SUSP_JOB_COUNT_, DEADLETTER_JOB_COUNT_, VAR_COUNT_, ID_LINK_COUNT_)
+    values
+    <foreach collection="list" item="execution" index="index" separator=",">
+      (#{execution.id ,jdbcType=VARCHAR},
+      1,
+      #{execution.processInstanceId, jdbcType=VARCHAR},
+      #{execution.businessKey, jdbcType=VARCHAR},
+      #{execution.processDefinitionId ,jdbcType=VARCHAR},
+      #{execution.activityId ,jdbcType=VARCHAR},
+      #{execution.isActive ,jdbcType=BOOLEAN},
+      #{execution.isConcurrent ,jdbcType=BOOLEAN},
+      #{execution.isScope ,jdbcType=BOOLEAN},
+      #{execution.isEventScope ,jdbcType=BOOLEAN},
+      #{execution.isMultiInstanceRoot, jdbcType=BOOLEAN},
+      #{execution.parentId, jdbcType=VARCHAR},
+      #{execution.superExecutionId, jdbcType=VARCHAR},
+      #{execution.rootProcessInstanceId, jdbcType=VARCHAR},
+      #{execution.suspensionState, jdbcType=INTEGER},
+      #{execution.tenantId, jdbcType=VARCHAR},
+      #{execution.name, jdbcType=VARCHAR},
+      #{execution.startTime, jdbcType=TIMESTAMP},
+      #{execution.startUserId, jdbcType=VARCHAR},
+      null,
+      #{execution.isCountEnabled, jdbcType=BOOLEAN},
+      #{execution.eventSubscriptionCount, jdbcType=INTEGER},
+      #{execution.taskCount, jdbcType=INTEGER},
+      #{execution.jobCount, jdbcType=INTEGER},
+      #{execution.timerJobCount, jdbcType=INTEGER},
+      #{execution.suspendedJobCount, jdbcType=INTEGER},
+      #{execution.deadLetterJobCount, jdbcType=INTEGER},
+      #{execution.variableCount, jdbcType=INTEGER},
+      #{execution.identityLinkCount, jdbcType=INTEGER})
+    </foreach>
+  </insert>
   <update id="updateExecutionTenantIdForDeployment" parameterType="java.util.Map">
     update ${prefix}ACT_RU_EXECUTION set
       TENANT_ID_ = #{tenantId, jdbcType=VARCHAR}

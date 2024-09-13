@@ -1105,6 +1105,7 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
   public static final String DATABASE_TYPE_MSSQL = "mssql";
   public static final String DATABASE_TYPE_DB2 = "db2";
   public static final String DATABASE_TYPE_XUGU = "xugu";
+    public static final String DATABASE_TYPE_CAE = "cae";
 
   public static Properties getDefaultDatabaseTypeMappings() {
     Properties databaseTypeMappings = new Properties();
@@ -1138,6 +1139,7 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
     databaseTypeMappings.setProperty("DB2 UDB AS400", DATABASE_TYPE_DB2);
     databaseTypeMappings.setProperty("MariaDB", DATABASE_TYPE_MYSQL);
     databaseTypeMappings.setProperty("XuguDB", DATABASE_TYPE_XUGU);
+      databaseTypeMappings.setProperty("CAEDB SQL Server", DATABASE_TYPE_CAE);
     return databaseTypeMappings;
   }
 
@@ -1212,7 +1214,8 @@ public abstract class ProcessEngineConfigurationImpl extends ProcessEngineConfig
         properties.put("boolValue" , "TRUE");
 
         if (databaseType != null) {
-            if (DATABASE_TYPE_XUGU.equals(databaseType)){
+            //xugu与cae共用一份属性文件
+            if (DATABASE_TYPE_XUGU.equals(databaseType)||DATABASE_TYPE_CAE.equals(databaseType)){
                 properties.load(getResourceAsStream("org/activiti/db/properties/" + DATABASE_TYPE_XUGU + ".properties"));
             }else {
                 properties.load(getResourceAsStream("org/activiti/db/properties/" + databaseType + ".properties"));
