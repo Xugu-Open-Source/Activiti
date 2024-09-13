@@ -50,6 +50,14 @@ public class DbSqlSessionFactory implements SessionFactory {
     databaseSpecificOrderByStatements.put("xugu", defaultOrderBy);
     addDatabaseSpecificStatement("xugu", "bulkInsertExecution", "bulkInsertExecution_xugu");
 
+    //cae
+    databaseSpecificLimitBeforeStatements.put("cae", "");
+    databaseSpecificLimitAfterStatements.put("cae", "LIMIT #{maxResults} OFFSET #{firstResult}");
+    databaseSpecificLimitBetweenStatements.put("cae", "");
+    databaseOuterJoinLimitBetweenStatements.put("cae", "");
+    databaseSpecificOrderByStatements.put("cae", defaultOrderBy);
+    addDatabaseSpecificStatement("cae", "bulkInsertExecution", "bulkInsertExecution_xugu");
+
 
     // h2
     databaseSpecificLimitBeforeStatements.put("h2", "");
@@ -335,7 +343,7 @@ public class DbSqlSessionFactory implements SessionFactory {
   	}
 
   	// Only Oracle is making a fuss in one specific case right now
-          if ("oracle".equals(databaseType) || "xugu".equalsIgnoreCase(databaseType)) {
+          if ("oracle".equals(databaseType) || "xugu".equalsIgnoreCase(databaseType)||"cae".equalsIgnoreCase(databaseType)) {
 			bulkInsertableMap.put(EventLogEntryEntity.class, Boolean.FALSE);
 		}
   }
