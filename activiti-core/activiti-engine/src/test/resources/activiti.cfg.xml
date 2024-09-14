@@ -6,7 +6,7 @@
 
   <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
     <property name="jdbcDriver" value="com.xugu.cloudjdbc.Driver"/>
-    <property name="jdbcUrl" value="jdbc:xugu://localhost:5138/activiti_test?useUnicode=true&amp;uselike=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true&amp;keyword_filter=LINK"/>
+    <property name="jdbcUrl" value="jdbc:xugu://localhost:5135/activiti_cae?useUnicode=true&amp;uselike=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true&amp;keyword_filter=LINK"/>
     <property name="jdbcUsername" value="SYSDBA"/>
     <property name="jdbcPassword" value="SYSDBA"/>
     <!-- activiti数据库表处理策略 -->
