@@ -185,7 +185,7 @@ public class DbSqlSessionFactory implements SessionFactory {
   	}
 
   	// Only Oracle is making a fuss in one specific case right now
-      if ("oracle".equals(databaseType) || "XUGU".equalsIgnoreCase(databaseType)) {
+      if ("oracle".equals(databaseType) || "XUGU".equalsIgnoreCase(databaseType)||"CAE".equalsIgnoreCase(databaseType)) {
 			bulkInsertableMap.put(EventLogEntryEntityImpl.class, Boolean.FALSE);
 		}
   }
