@@ -200,9 +200,9 @@ public abstract class AbstractQuery<T extends Query<?,?>, U> extends ListQueryPa
   	String defaultOrderByClause =  column + " "+sortOrder;
     
   	if (nullHandlingOnOrder != null) {
-  		
+
   		if (nullHandlingOnOrder.equals(NullHandlingOnOrder.NULLS_FIRST)) {
-  			
+
   			if (ProcessEngineConfigurationImpl.DATABASE_TYPE_H2.equals(databaseType)
             || ProcessEngineConfigurationImpl.DATABASE_TYPE_HSQL.equals(databaseType)
   					|| ProcessEngineConfigurationImpl.DATABASE_TYPE_POSTGRES.equals(databaseType)
@@ -213,7 +213,9 @@ public abstract class AbstractQuery<T extends Query<?,?>, U> extends ListQueryPa
     		} else if (ProcessEngineConfigurationImpl.DATABASE_TYPE_DB2.equals(databaseType)
     				|| ProcessEngineConfigurationImpl.DATABASE_TYPE_MSSQL.equals(databaseType)) {
     			orderBy = orderBy + "case when " + column + " is null then 0 else 1 end," + defaultOrderByClause;
-    		} else {
+    		} else if (ProcessEngineConfigurationImpl.DATABASE_TYPE_XUGU.equals(databaseType)) {
+                orderBy = orderBy + "isnull(" + column + ") desc," + defaultOrderByClause;
+            } else {
     			orderBy = orderBy + defaultOrderByClause;
     		}
     		
@@ -230,7 +232,9 @@ public abstract class AbstractQuery<T extends Query<?,?>, U> extends ListQueryPa
     		} else if (ProcessEngineConfigurationImpl.DATABASE_TYPE_DB2.equals(databaseType)
     				|| ProcessEngineConfigurationImpl.DATABASE_TYPE_MSSQL.equals(databaseType)) {
     			orderBy = orderBy + "case when " + column + " is null then 1 else 0 end," + defaultOrderByClause;
-    		} else {
+    		} else if (ProcessEngineConfigurationImpl.DATABASE_TYPE_XUGU.equals(databaseType)) {
+                orderBy = orderBy + "isnull(" + column + ") asc," + defaultOrderByClause;
+            } else {
     			orderBy = orderBy + defaultOrderByClause;
     		}
       	
