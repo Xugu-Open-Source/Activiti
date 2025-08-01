@@ -203,5 +203,6 @@
     <module>activiti-spring-app-process</module>
     <module>activiti-spring-process-extensions</module>
     <module>activiti-spring-conformance-tests</module>
+    <module>activiti-xugu-test</module>
   </modules>
 </project>
