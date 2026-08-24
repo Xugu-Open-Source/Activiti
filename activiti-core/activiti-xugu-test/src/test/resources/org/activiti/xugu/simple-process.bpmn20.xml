@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             targetNamespace="http://activiti.org/xugu-test">
+
+  <process id="xuguTestProcess" name="XuGu Test Process" isExecutable="true">
+
+    <startEvent id="startEvent1" name="Start"/>
+
+    <sequenceFlow id="flow1" sourceRef="startEvent1" targetRef="userTask1"/>
+
+    <userTask id="userTask1" name="Confirm XuGu works"/>
+
+    <sequenceFlow id="flow2" sourceRef="userTask1" targetRef="endEvent1"/>
+
+    <endEvent id="endEvent1" name="End"/>
+
+  </process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_xuguTestProcess">
+    <bpmndi:BPMNPlane bpmnElement="xuguTestProcess" id="BPMNPlane_xuguTestProcess">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="100.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask1" id="BPMNShape_userTask1">
+        <omgdc:Bounds height="60.0" width="100.0" x="200.0" y="88.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endEvent1" id="BPMNShape_endEvent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="400.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="135.0" y="117.0"/>
+        <omgdi:waypoint x="200.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="300.0" y="118.0"/>
+        <omgdi:waypoint x="400.0" y="117.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

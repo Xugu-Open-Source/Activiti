@@ -184,8 +184,8 @@ public class DbSqlSessionFactory implements SessionFactory {
   		bulkInsertableMap.put(clazz, Boolean.TRUE);
   	}
 
-  	// Only Oracle is making a fuss in one specific case right now
-		if ("oracle".equals(databaseType)) {
+  	// Oracle and XuGu: disable bulk insert for event log (identity/auto-increment path).
+		if ("oracle".equals(databaseType) || "xugu".equalsIgnoreCase(databaseType)) {
 			bulkInsertableMap.put(EventLogEntryEntityImpl.class, Boolean.FALSE);
 		}
   }

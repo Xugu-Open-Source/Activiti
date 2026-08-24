@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.activiti</groupId>
+    <artifactId>activiti-core-dependencies</artifactId>
+    <version>7.7.0</version>
+    <relativePath>../activiti-core-dependencies</relativePath>
+  </parent>
+
+  <artifactId>activiti-xugu-test</artifactId>
+  <name>Activiti :: XuGu Database Test</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- File/coordinate label 12.3.6; jar metadata may still report 12.3.4. -->
+    <xugu.jdbc.version>12.3.6</xugu.jdbc.version>
+    <!-- Public placeholders; override with -D or env when running -Pxugu-test. -->
+    <xugu.jdbc.url>jdbc:xugu://127.0.0.1:5138/ACTIVITI_TEST</xugu.jdbc.url>
+    <xugu.jdbc.user>SYSDBA</xugu.jdbc.user>
+    <xugu.jdbc.password>SYSDBA</xugu.jdbc.password>
+    <xugu.jdbc.driver>com.xugu.cloudjdbc.Driver</xugu.jdbc.driver>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.activiti</groupId>
+      <artifactId>activiti-engine</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.xugudb</groupId>
+      <artifactId>xugu-jdbc</artifactId>
+      <version>${xugu.jdbc.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!-- Live XuGu tests are opt-in via -Pxugu-test. -->
+          <skipTests>true</skipTests>
+          <systemPropertyVariables>
+            <xugu.jdbc.url>${xugu.jdbc.url}</xugu.jdbc.url>
+            <xugu.jdbc.user>${xugu.jdbc.user}</xugu.jdbc.user>
+            <xugu.jdbc.password>${xugu.jdbc.password}</xugu.jdbc.password>
+            <xugu.jdbc.driver>${xugu.jdbc.driver}</xugu.jdbc.driver>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>xugu-test</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skipTests>false</skipTests>
+              <redirectTestOutputToFile>false</redirectTestOutputToFile>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

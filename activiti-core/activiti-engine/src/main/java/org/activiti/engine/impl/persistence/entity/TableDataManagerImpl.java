@@ -163,11 +163,16 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
         log.debug("retrieving activiti tables from jdbc metadata");
         String databaseTablePrefix = getDbSqlSession().getDbSqlSessionFactory().getDatabaseTablePrefix();
         String tableNameFilter = databaseTablePrefix + "ACT_%";
-        if ("postgres".equals(getDbSqlSession().getDbSqlSessionFactory().getDatabaseType())) {
+        String databaseType = getDbSqlSession().getDbSqlSessionFactory().getDatabaseType();
+        if ("postgres".equals(databaseType)) {
           tableNameFilter = databaseTablePrefix + "act_%";
         }
-        if ("oracle".equals(getDbSqlSession().getDbSqlSessionFactory().getDatabaseType())) {
+        if ("oracle".equals(databaseType)) {
           tableNameFilter = databaseTablePrefix + "ACT" + databaseMetaData.getSearchStringEscape() + "_%";
+        }
+        // XuGu JDBC metadata does not honor ACT_% wildcards; list all tables then filter.
+        if ("xugu".equalsIgnoreCase(databaseType)) {
+          tableNameFilter = "%";
         }
 
         String catalog = null;
@@ -177,7 +182,7 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
 
         String schema = null;
         if (getProcessEngineConfiguration().getDatabaseSchema() != null && getProcessEngineConfiguration().getDatabaseSchema().length() > 0) {
-          if ("oracle".equals(getDbSqlSession().getDbSqlSessionFactory().getDatabaseType())) {
+          if ("oracle".equals(databaseType)) {
             schema = getProcessEngineConfiguration().getDatabaseSchema().toUpperCase();
           } else {
             schema = getProcessEngineConfiguration().getDatabaseSchema();
@@ -185,9 +190,13 @@ public class TableDataManagerImpl extends AbstractManager implements TableDataMa
         }
 
         tables = databaseMetaData.getTables(catalog, schema, tableNameFilter, DbSqlSession.JDBC_METADATA_TABLE_TYPES);
+        String activitiPrefix = (databaseTablePrefix + "ACT_").toUpperCase();
         while (tables.next()) {
           String tableName = tables.getString("TABLE_NAME");
           tableName = tableName.toUpperCase();
+          if ("xugu".equalsIgnoreCase(databaseType) && !tableName.startsWith(activitiPrefix)) {
+            continue;
+          }
           tableNames.add(tableName);
           log.debug("  retrieved activiti table name {}", tableName);
         }

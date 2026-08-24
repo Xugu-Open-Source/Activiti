@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!--
+    Sample standalone config for local experiments.
+    Override jdbc* with your environment; do not commit lab IPs or real secrets.
+  -->
+  <bean id="processEngineConfiguration"
+        class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+    <property name="jdbcUrl" value="jdbc:xugu://127.0.0.1:5138/ACTIVITI_TEST" />
+    <property name="jdbcDriver" value="com.xugu.cloudjdbc.Driver" />
+    <property name="jdbcUsername" value="SYSDBA" />
+    <property name="jdbcPassword" value="SYSDBA" />
+    <property name="databaseType" value="xugu" />
+    <property name="databaseSchemaUpdate" value="true" />
+    <property name="history" value="full" />
+    <property name="asyncExecutorActivate" value="false" />
+  </bean>
+</beans>
