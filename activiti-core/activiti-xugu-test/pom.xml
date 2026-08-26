@@ -23,6 +23,14 @@
     <xugu.jdbc.user>SYSDBA</xugu.jdbc.user>
     <xugu.jdbc.password>SYSDBA</xugu.jdbc.password>
     <xugu.jdbc.driver>com.xugu.cloudjdbc.Driver</xugu.jdbc.driver>
+
+    <!-- The verification JVM is Java 21 (class file major version 65).
+         JaCoCo 0.8.8 / ASM 9.3 cannot instrument those classes and abort the
+         forked test JVM during setup ("Error while instrumenting java/sql/RowId
+         ... Unsupported class file major version 65"), so override the parent
+         versions for this module only. -->
+    <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+    <asm.version>9.7</asm.version>
   </properties>
 
   <dependencies>
@@ -46,6 +54,26 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Script task engines for modern JDKs: Groovy 4 (org.apache.groovy) reads
+         class file major 65, and Nashorn is no longer part of the JDK. -->
+    <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy</artifactId>
+      <version>4.0.21</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy-jsr223</artifactId>
+      <version>4.0.21</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.nashorn</groupId>
+      <artifactId>nashorn-core</artifactId>
+      <version>15.4</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

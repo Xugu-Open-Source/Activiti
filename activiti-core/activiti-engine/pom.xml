@@ -13,6 +13,15 @@
   <artifactId>activiti-engine</artifactId>
   <name>Activiti :: Engine</name>
 
+  <properties>
+    <!-- The verification JVM is Java 21 (class file major version 65).
+         JaCoCo 0.8.8 / ASM 9.3 from the parent cannot instrument those classes
+         ("Error while instrumenting ... Unsupported class file major version 65"),
+         so override them for this module. -->
+    <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+    <asm.version>9.7</asm.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.activiti</groupId>
@@ -92,14 +101,27 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
+    <!-- Groovy 4 (org.apache.groovy) is required when the build/test JDK is 17/21:
+         Groovy 2.x/3.x from the Spring Boot BOM cannot read class file major version 65
+         ("BUG! exception in phase 'semantic analysis' ... Unsupported class file major version 65"). -->
     <dependency>
-      <groupId>org.codehaus.groovy</groupId>
+      <groupId>org.apache.groovy</groupId>
       <artifactId>groovy</artifactId>
+      <version>4.0.21</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.groovy</groupId>
+      <groupId>org.apache.groovy</groupId>
       <artifactId>groovy-jsr223</artifactId>
+      <version>4.0.21</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Nashorn was removed from the JDK, so the 'javascript' scripting engine used by
+         script tasks must be provided explicitly on modern JDKs. -->
+    <dependency>
+      <groupId>org.openjdk.nashorn</groupId>
+      <artifactId>nashorn-core</artifactId>
+      <version>15.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
