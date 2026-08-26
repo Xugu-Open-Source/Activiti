@@ -45,7 +45,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Live XuGu integration tests for Activiti 7.7.0.
+ * Live XuGu integration tests for Activiti 8.8.1.
  *
  * <p>Opt-in only: run with {@code -Pxugu-test}. Connection settings come from
  * system properties / environment variables — never from committed lab hosts.
@@ -125,7 +125,7 @@ public class XuguIntegrationTest {
     public void testEngineStartsAndSchemaCreated() {
         assertNotNull("Process engine should be created", processEngine);
         assertNotNull("Repository service should be available", processEngine.getRepositoryService());
-        assertEquals("7.1.0-M6",
+        assertEquals("8.8.1",
                 processEngine.getManagementService().getProperties().get("schema.version"));
     }
 
